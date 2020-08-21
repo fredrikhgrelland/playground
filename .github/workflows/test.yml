@@ -17,6 +17,6 @@ jobs:
       with:
         filters: |
           only-doc:
-            - '**/!*.md'
+            - '**/*.md'
           template:
             - 'template/**/*'
