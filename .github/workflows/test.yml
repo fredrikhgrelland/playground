@@ -8,7 +8,6 @@ jobs:
     # Set job outputs to values from filter step
     outputs:
       only-doc: ${{ steps.filter.outputs.only-doc }}
-      template: ${{ steps.filter.outputs.template }}
     steps:
     # For pull requests it's not necessary to checkout the code
     - uses: actions/checkout@v2
@@ -16,7 +15,7 @@ jobs:
       id: filter
       with:
         filters: |
-          only-doc:
+          doc:
             - '**/*.md'
-          template:
-            - 'template/**/*'
+          no-doc:
+            - '**/!*.md'
