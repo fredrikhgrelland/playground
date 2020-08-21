@@ -1,0 +1,23 @@
+name: CI/CD
+env:
+  GITHUB_TOKEN: ${{ secrets.PAT_GITHUB_TOKEN }}
+on:
+  push:
+    branches: [ master ]
+jobs:
+  changes:
+    runs-on: ubuntu-latest
+    # Set job outputs to values from filter step
+    outputs:
+      only-doc: ${{ steps.filter.outputs.only-doc }}
+      template: ${{ steps.filter.outputs.template }}
+    steps:
+    # For pull requests it's not necessary to checkout the code
+    - uses: dorny/paths-filter@v2.2.1
+      id: filter
+      with:
+        filters: |
+          only-doc:
+            - '**/!*.md'
+          template:
+            - 'template/**/*'
